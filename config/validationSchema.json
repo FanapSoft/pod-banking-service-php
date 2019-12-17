@@ -1,0 +1,1237 @@
+{
+  "getShebaInfo": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "sheba": {
+          "type": "string",
+          "pattern": "^(|IR)(?=.{24}$)[0-9]*$",
+          "pattern": "^(|IR)(\\d)(?!\\1{23}$)\\d{23}$"
+        }
+      },
+      "required": [
+        "sheba"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "getDebitCardInfo": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "CardNumber": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{15}$"
+        }
+      },
+      "required": [
+        "CardNumber"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "getDepositNumberByCardNumber": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "CardNumber": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{15}$"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CardNumber", "UserName", "Timestamp"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "getShebaByCardNumber": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "CardNumber": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{15}$"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "CardNumber", "UserName", "Timestamp"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "getCardInformation": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "SrcCardNumber": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{15}$"
+        },
+        "DestCardNumber": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{15}$"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string",
+          "format": "email"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "SrcCardNumber","DestCardNumber", "UserName", "Timestamp"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "cardToCard": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "SrcCardNumber": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{15}$"
+        },
+        "DestCardNumber": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{15}$"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "number"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "ExpireMonth": {
+          "type": "string",
+          "pattern": "^([0][1-9]|[1][0-2])$"
+        },
+        "ExpireYear": {
+          "type": "string",
+          "pattern": "^[0-9][0-9]$"
+        },
+        "AuthorizationCode": {
+          "type": "string"
+        },
+        "CardName": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "srcComment": {
+          "type": "string"
+        },
+        "DestComment": {
+          "type": "string"
+        },
+        "OriginalAddress": {
+          "type": "string"
+        },
+        "WithReferenceNumber": {
+          "type": "string"
+        },
+        "Cvv2": {
+          "type": "string",
+          "pattern": "^[0-9]{3,4}$"
+        },
+        "ExtraData": {
+          "type": "array",
+          "items": {
+            "imei": {
+              "type": "string",
+              "title":"شماره سریال دستگاه"
+            },
+            "OS": {
+              "type": "string"
+            },
+            "Platform": {
+              "type": "string",
+              "enum": ["WEB", "ANDROID", "IOS", "WINDOWS"]
+            },
+            "IP": {
+              "type": "string",
+              "format": "ipv4"
+            },
+            "UserAgent": {
+              "type": "string"
+            },
+            "DeviceId": {
+              "type": "string"
+            }
+          },
+          "required": []
+        },
+
+        "Email": {
+          "type": "string",
+          "format": "email"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "SrcCardNumber", "DestCardNumber", "UserName", "Timestamp", "Password", "Amount", "ExpireMonth", "Cvv2", "Password"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "cardToCardList": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "SourceCardNumber": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{15}$"
+        },
+        "DestinationCardNumber": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]{15}$"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "MinAmount": {
+          "type": "number"
+        },
+        "MaxAmount": {
+          "type": "number"
+        },
+        "StartDate": {
+          "type": "string",
+          "pattern": "^((19[0-9]{2})|([2][0-9]{3}))\/([1-9]|0[1-9]|1[0-2])\/([1-2][0-9]|0[1-9]|3[0-1]|[1-9])$"
+        },
+        "EndDate": {
+          "type": "string",
+          "pattern": "^((19[0-9]{2})|([2][0-9]{3}))\/([1-9]|0[1-9]|1[0-2])\/([1-2][0-9]|0[1-9]|3[0-1]|[1-9])$"
+        },
+        "SequenceNumber": {
+          "type": "string"
+        },
+        "ReferenceNumber": {
+          "type": "string"
+        },
+         "SourceNote": {
+          "type": "string"
+        },
+         "DestinationNote": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "UserName",
+        "SourceCardNumber",
+        "StartDate",
+        "EndDate",
+        "MinAmount",
+        "MaxAmount"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "getSubmissionCheque": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "Deposit": {
+          "type": "string"
+        },
+        "ChequeNumber": {
+          "type": "string"
+        },
+        "MinAmount": {
+          "type": "integer"
+        },
+        "MaxAmount": {
+          "type": "integer"
+        },
+        "StartDate": {
+          "type": "string",
+          "pattern": "^((19[0-9]{2})|([2][0-9]{3}))\/([1-9]|0[1-9]|1[0-2])\/([1-2][0-9]|0[1-9]|3[0-1]|[1-9])$"
+
+        },
+        "EndDate": {
+          "type": "string",
+          "pattern": "^((19[0-9]{2})|([2][0-9]{3}))\/([1-9]|0[1-9]|1[0-2])\/([1-2][0-9]|0[1-9]|3[0-1]|[1-9])$"
+        },
+        "BankCode": {
+          "type": "integer",
+          "enum": [
+            -1,
+            55,
+            63,
+            69,
+            95,
+            62,
+            10,
+            54,
+            57,
+            21,
+            18,
+            22,
+            20,
+            65,
+            78,
+            66,
+            70,
+            13,
+            56,
+            15,
+            58,
+            59,
+            61,
+            19,
+            11,
+            60,
+            52,
+            53,
+            16,
+            64,
+            14,
+            12,
+            17,
+            51,
+            73,
+            75,
+            80
+          ]
+        },
+        "ChequeStatus": {
+          "type": "integer",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ]
+        },
+        "StartSubmisionDate": {
+          "type": "string",
+          "pattern": "^((19[0-9]{2})|([2][0-9]{3}))\/([1-9]|0[1-9]|1[0-2])\/([1-2][0-9]|0[1-9]|3[0-1]|[1-9])$"
+        },
+        "EndSubmissionDate": {
+          "type": "string",
+          "pattern": "^((19[0-9]{2})|([2][0-9]{3}))\/([1-9]|0[1-9]|1[0-2])\/([1-2][0-9]|0[1-9]|3[0-1]|[1-9])$"
+        },
+        "RowCount": {
+          "type": "integer"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "UserName",
+        "Timestamp",
+        "Deposit",
+        "MinAmount",
+        "MaxAmount",
+        "StartDate",
+        "EndDate",
+        "BankCode",
+        "ChequeStatus",
+        "StartSubmisionDate",
+        "EndSubmissionDate",
+        "RowCount"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "convertDepositNumberToSheba": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "DepositNumber": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "UserName",
+        "DepositNumber",
+        "Timestamp"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "convertShebaToDepositNumber": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Sheba": {
+          "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
+          "title": "کد شبا حساب بانکی",
+          "description": "شبا که به صورت عددی وارد می شود. (بدون IR)"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "UserName",
+        "Sheba",
+        "Timestamp"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "payaService": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "SourceDepositNumber": {
+          "type": "string"
+        },
+        "TransferMoneyBillNumber": {
+          "type": "string"
+        },
+        "FileUniqueIdentifier": {
+          "type": "string"
+        },
+        "BatchPayaItemInfos": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "Amount": {
+                "type": "number"
+              },
+              "BeneficiaryFullName": {
+                "type": "string"
+              },
+              "Description": {
+                "type": "string"
+              },
+              "DestShebaNumber": {
+                "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
+                "title": "کد شبا حساب بانکی مقصد",
+                "description": "شبا که به صورت عددی وارد می شود. (بدون IR)"
+              },
+              "BillNumber": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Amount",
+              "BeneficiaryFullName",
+              "Description",
+              "DestShebaNumber",
+              "BillNumber"
+            ],
+            "additionalItems": false
+          }
+        },
+        "privateKey": {
+          "type": "Resource"
+        }
+      },
+      "required": [
+        "scApiKey",
+        "UserName",
+        "Timestamp",
+        "SourceDepositNumber",
+        "FileUniqueIdentifier",
+        "BatchPayaItemInfos"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "getDepositInvoice": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "DepositNumber": {
+          "type": "string"
+        },
+        "Sheba": {
+          "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
+          "title": "کد شبا حساب بانکی",
+          "description": "شبا که به صورت عددی وارد می شود. (بدون IR)"
+        },
+        "StartDate": {
+          "type": "string",
+          "pattern": "^((19[0-9]{2})|([2][0-9]{3}))\/([1-9]|0[1-9]|1[0-2])\/([1-2][0-9]|0[1-9]|3[0-1]|[1-9])$"
+        },
+        "EndDate": {
+          "type": "string",
+          "pattern": "^((19[0-9]{2})|([2][0-9]{3}))\/([1-9]|0[1-9]|1[0-2])\/([1-2][0-9]|0[1-9]|3[0-1]|[1-9])$"
+        },
+        "Count" : {
+          "type": "integer"
+        },
+        "FirstIndex": {
+          "type": "integer"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+          "UserName",
+          "Timestamp",
+          "DepositNumber",
+          "StartDate",
+          "EndDate"
+          ]
+        },
+        {
+          "required": [
+            "UserName",
+            "Timestamp",
+            "Sheba",
+            "StartDate",
+            "EndDate"
+          ]
+        }
+      ],
+
+      "additionalProperties": false
+    }
+  },
+
+  "getDepositBalance": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "DepositNumber": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "Sheba": {
+          "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
+          "title": "کد شبا حساب بانکی",
+          "description": "شبا که به صورت عددی وارد می شود. (بدون IR)"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "UserName",
+            "Timestamp",
+            "DepositNumber"
+          ]
+        },
+        {
+          "required": [
+            "UserName",
+            "Timestamp",
+            "Sheba"
+          ]
+        }
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "transferMoney": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "SourceDepositNumber": {
+          "type": "string"
+        },
+        "SourceSheba": {
+          "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
+          "title": "کد شبا حساب بانکی مبدا",
+          "description": "شبا که به صورت عددی وارد می شود. (با IR)"
+        },
+        "DestDepositNumber": {
+          "type": "string"
+        },
+        "DestSheba": {
+          "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
+          "title": "کد شبا حساب بانکی مقصد",
+          "description": "شبا که به صورت عددی وارد می شود. (با IR)"
+        },
+        "DestFirstName": {
+          "type": "string"
+        },
+        "DestLastName": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "number"
+        },
+        "SourceComment": {
+          "type": "string"
+        },
+        "DestComment": {
+          "type": "string"
+        },
+        "PaymentId": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "UserName",
+            "Amount",
+            "PaymentId",
+            "Timestamp",
+            "SourceDepositNumber",
+            "DestDepositNumber"
+          ]
+        },
+        {
+          "required": [
+            "UserName", "Amount", "PaymentId", "Timestamp", "SourceDepositNumber", "DestSheba"
+         ]
+        },
+        {
+          "required": [
+            "UserName", "Amount", "PaymentId", "Timestamp", "SourceSheba", "DestDepositNumber"
+         ]
+        },
+        {
+          "required": [
+            "UserName", "Amount", "PaymentId", "Timestamp", "SourceSheba", "DestSheba"
+         ]
+        }
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "getTransferState": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Date": {
+          "type": "string",
+          "pattern": "^((19[0-9]{2})|([2][0-9]{3}))\/([1-9]|0[1-9]|1[0-2])\/([1-2][0-9]|0[1-9]|3[0-1]|[1-9])$"
+        },
+        "PaymentId": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "UserName", "Date", "PaymentId", "Timestamp"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "billPaymentByDeposit": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "DepositNumber": {
+          "type": "string"
+        },
+        "BillNumber": {
+          "type": "string",
+          "title": "شناسه قبض"
+        },
+        "PaymentId": {
+          "type": "string",
+          "title": "شناسه پرداخت"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "UserName",
+        "Timestamp",
+        "DepositNumber",
+        "BillNumber",
+        "PaymentId"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
