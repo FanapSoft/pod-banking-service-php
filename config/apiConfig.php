@@ -110,5 +110,12 @@ return  [
         "baseUri" => 'PLATFORM-ADDRESS',
         "subUri" => 'nzh/doServiceCall',
         "method" => 'POST'
+    ],
+
+    #17  دریافت اطلاعات و وضعیت شبا
+    "getShebaInfoAndStatus" => [
+        "baseUri" => 'PLATFORM-ADDRESS',
+        "subUri" => 'nzh/doServiceCall',
+        "method" => 'POST'
     ]
 ];

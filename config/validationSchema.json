@@ -90,6 +90,62 @@
     }
   },
 
+  "getShebaInfoAndStatus": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "_token_": {
+          "type": "string",
+          "minLength": 1
+        },
+        "_token_issuer_": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_token_",
+        "_token_issuer_"
+      ],
+      "additionalProperties": false
+    },
+    "form_params": {
+      "type": "object",
+      "properties": {
+        "scVoucherHash": {
+          "type": "array",
+          "title": "کد تخفیف برای فراخوانی سرویس کال",
+          "description": "کد تخفیف برای فراخوانی سرویس کال",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scApiKey": {
+          "type": "string",
+          "title": "توکن برای فراخوانی سرویس کال"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string"
+        },
+        "Sheba": {
+          "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
+          "title": "کد شبا حساب بانکی",
+          "description": "شبا که به صورت عددی وارد می شود. (بدون IR)"
+        },
+        "ShenaseVariz": {
+          "type": "string"
+        },
+        "privateKey": {
+          "type": "string"
+        }
+      },
+      "required": ["UserName", "Sheba", "Timestamp", "scApiKey", "privateKey"],
+      "additionalProperties": false
+    }
+  },
+
   "getDepositNumberByCardNumber": {
     "header": {
       "type": "object",
@@ -138,7 +194,7 @@
         }
       },
       "required": [
-        "CardNumber", "UserName", "Timestamp"
+        "CardNumber", "UserName", "Timestamp", "privateKey", "scApiKey"
       ],
       "additionalProperties": false
     }
@@ -192,7 +248,7 @@
         }
       },
       "required": [
-        "CardNumber", "UserName", "Timestamp"
+        "CardNumber", "UserName", "Timestamp", "privateKey", "scApiKey"
       ],
       "additionalProperties": false
     }
@@ -254,7 +310,7 @@
         }
       },
       "required": [
-        "SrcCardNumber","DestCardNumber", "UserName", "Timestamp"
+        "SrcCardNumber","DestCardNumber", "UserName", "Timestamp", "privateKey","scApiKey"
       ],
       "additionalProperties": false
     }
@@ -380,7 +436,7 @@
         }
       },
       "required": [
-        "SrcCardNumber", "DestCardNumber", "UserName", "Timestamp", "Password", "Amount", "ExpireMonth", "Cvv2", "Password"
+        "SrcCardNumber", "DestCardNumber", "UserName", "Timestamp", "Password", "Amount", "ExpireMonth", "Cvv2", "Password", "privateKey","scApiKey"
       ],
       "additionalProperties": false
     }
@@ -422,6 +478,9 @@
         "SourceCardNumber": {
           "type": "string",
           "pattern": "^[1-9][0-9]{15}$"
+        },
+        "SourceDepositNumber": {
+          "type": "string"
         },
         "DestinationCardNumber": {
           "type": "string",
@@ -469,7 +528,9 @@
         "StartDate",
         "EndDate",
         "MinAmount",
-        "MaxAmount"
+        "MaxAmount",
+        "privateKey",
+        "scApiKey"
       ],
       "additionalProperties": false
     }
@@ -630,11 +691,14 @@
         "ChequeStatus",
         "StartSubmisionDate",
         "EndSubmissionDate",
-        "RowCount"
+        "RowCount",
+        "privateKey",
+        "scApiKey"
       ],
       "additionalProperties": false
     }
   },
+
   "convertDepositNumberToSheba": {
     "header": {
       "type": "object",
@@ -684,7 +748,9 @@
       "required": [
         "UserName",
         "DepositNumber",
-        "Timestamp"
+        "Timestamp",
+        "privateKey",
+        "scApiKey"
       ],
       "additionalProperties": false
     }
@@ -741,7 +807,9 @@
       "required": [
         "UserName",
         "Sheba",
-        "Timestamp"
+        "Timestamp",
+        "privateKey",
+        "scApiKey"
       ],
       "additionalProperties": false
     }
@@ -838,7 +906,9 @@
         "Timestamp",
         "SourceDepositNumber",
         "FileUniqueIdentifier",
-        "BatchPayaItemInfos"
+        "BatchPayaItemInfos",
+        "privateKey",
+        "scApiKey"
       ],
       "additionalProperties": false
     }
@@ -916,7 +986,9 @@
           "Timestamp",
           "DepositNumber",
           "StartDate",
-          "EndDate"
+          "EndDate",
+          "privateKey",
+          "scApiKey"
           ]
         },
         {
@@ -925,7 +997,9 @@
             "Timestamp",
             "Sheba",
             "StartDate",
-            "EndDate"
+            "EndDate",
+            "privateKey",
+            "scApiKey"
           ]
         }
       ],
@@ -990,14 +1064,18 @@
           "required": [
             "UserName",
             "Timestamp",
-            "DepositNumber"
+            "DepositNumber",
+            "privateKey",
+            "scApiKey"
           ]
         },
         {
           "required": [
             "UserName",
             "Timestamp",
-            "Sheba"
+            "Sheba",
+            "privateKey",
+            "scApiKey"
           ]
         }
       ],
@@ -1090,22 +1168,24 @@
             "PaymentId",
             "Timestamp",
             "SourceDepositNumber",
-            "DestDepositNumber"
+            "DestDepositNumber",
+            "privateKey",
+            "scApiKey"
           ]
         },
         {
           "required": [
-            "UserName", "Amount", "PaymentId", "Timestamp", "SourceDepositNumber", "DestSheba"
+            "UserName", "Amount", "PaymentId", "Timestamp", "SourceDepositNumber", "DestSheba", "privateKey","scApiKey"
          ]
         },
         {
           "required": [
-            "UserName", "Amount", "PaymentId", "Timestamp", "SourceSheba", "DestDepositNumber"
+            "UserName", "Amount", "PaymentId", "Timestamp", "SourceSheba", "DestDepositNumber", "privateKey", "scApiKey"
          ]
         },
         {
           "required": [
-            "UserName", "Amount", "PaymentId", "Timestamp", "SourceSheba", "DestSheba"
+            "UserName", "Amount", "PaymentId", "Timestamp", "SourceSheba", "DestSheba", "privateKey", "scApiKey"
          ]
         }
       ],
@@ -1164,7 +1244,7 @@
         }
       },
       "required": [
-        "UserName", "Date", "PaymentId", "Timestamp"
+        "UserName", "Date", "PaymentId", "Timestamp", "privateKey", "scApiKey"
       ],
       "additionalProperties": false
     }
@@ -1229,7 +1309,9 @@
         "Timestamp",
         "DepositNumber",
         "BillNumber",
-        "PaymentId"
+        "PaymentId",
+        "privateKey",
+        "scApiKey"
       ],
       "additionalProperties": false
     }
