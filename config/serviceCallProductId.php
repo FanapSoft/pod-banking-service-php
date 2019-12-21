@@ -4,6 +4,7 @@ return
         "Production" => [
             "getShebaInfo" => 34254,
             "getDebitCardInfo" => 34255,
+            "getShebaInfoAndStatus" => 35602,
             "getDepositNumberByCardNumber" => 35596,
             "getShebaByCardNumber" => 35597,
             "getCardInformation" => 35598,
@@ -22,6 +23,7 @@ return
         "Sandbox" => [
             "getShebaInfo" => 41386,
             "getDebitCardInfo" => 41387,
+            "getShebaInfoAndStatus" => 0,
             "getDepositNumberByCardNumber" => 0,
             "getShebaByCardNumber" => 0,
             "getCardInformation" => 0,

@@ -10,6 +10,7 @@
 namespace Pod\Banking\Service;
 
 use Pod\Base\Service\BaseService;
+use Pod\Base\Service\BaseInfo;
 use Pod\Base\Service\ApiRequestHandler;
 
 class BankingService extends BaseService
@@ -23,6 +24,7 @@ class BankingService extends BaseService
 
     public function __construct($baseInfo, $privateKey)
     {
+        BaseInfo::initServerType(BaseInfo::PRODUCTION_SERVER);
         parent::__construct();
         self::$jsonSchema = json_decode(file_get_contents(__DIR__ . '/../config/validationSchema.json'), true);
         $this->header = [
@@ -103,6 +105,73 @@ class BankingService extends BaseService
         );
     }
 
+    public function getShebaInfoAndStatus($params) {
+        $apiName = 'getShebaInfoAndStatus';
+        $defaultTimeZone = date_default_timezone_get();
+        date_default_timezone_set('Asia/Tehran');
+
+        $optionHasArray = false;
+        $header = $this->header;
+        $privateKey = $this->privateKey;
+
+        if(isset($params['token'])) {
+            $header["_token_"] = $params['token'];
+            unset($params['token']);
+        }
+
+        array_walk_recursive($params, 'self::prepareData');
+
+        $method = self::$bankingServiceApi[$apiName]['method'];
+        $paramKey = $method == 'GET' ? 'query' : 'form_params';
+
+        $relativeUri = self::$bankingServiceApi[$apiName]['subUri'];
+        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        date_default_timezone_set($defaultTimeZone);
+
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
+        $option = [
+            'headers' => $header,
+            $paramKey => $params, // set query param for validation
+        ];
+
+        self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
+        unset($params['privateKey']);
+
+        $dataForSign = [
+            "UserName" => $params["UserName"],
+            "Sheba" => $params["Sheba"],
+            "Timestamp" => $params["Timestamp"],
+        ];
+
+        // create signature
+        $privateKeyId = openssl_pkey_get_private($privateKey);
+        $data = json_encode($dataForSign, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        if (openssl_sign($data,$signature , $privateKeyId, OPENSSL_ALGO_SHA1)) {
+            $option[$paramKey]['signature'] = base64_encode($signature);
+        }
+        // free the key from memory
+        openssl_free_key($privateKeyId);
+
+        # set service call product Id
+        $option[$paramKey]['scProductId'] = self::$serviceCallProductId[$apiName];
+
+        if (isset($params['scVoucherHash'])) {
+            $option['withoutBracketParams'] =  $option[$paramKey];
+            unset($option[$paramKey]);
+            $optionHasArray = true;
+            $method = 'GET';
+        }
+
+        return BankingApiRequestHandler::Request(
+            self::$config[self::$serverType][self::$bankingServiceApi[$apiName]['baseUri']],
+            $method,
+            $relativeUri,
+            $option,
+            false,
+            $optionHasArray
+        );
+    }
+
     public function getDepositNumberByCardNumber($params) {
         $defaultTimeZone = date_default_timezone_get();
         date_default_timezone_set('Asia/Tehran');
@@ -126,17 +195,15 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
+        unset($params['privateKey']);
 
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
 
         $dataForSign = [
             "UserName" => $params["UserName"],
@@ -193,17 +260,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         $dataForSign = [
             "UserName" => $params["UserName"],
@@ -260,18 +324,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if is sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         // prepare data for sign
         $dataForSign = [
@@ -339,18 +399,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if is sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         // prepare data for sign
         $dataForSign = [
@@ -428,23 +484,20 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if is sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         // prepare data for sign
         $dataForSign = [
             "UserName" => $params["UserName"],
             "SourceCardNumber" => $params["SourceCardNumber"],
+            "SourceDepositNumber" => isset($params["SourceDepositNumber"]) ? $params["SourceDepositNumber"] : '',
             "DestinationCardNumber" => isset($params["DestinationCardNumber"]) ? $params["DestinationCardNumber"] : '',
             "MinAmount" => (string)$params["MinAmount"],
             "MaxAmount" => (string)$params["MaxAmount"],
@@ -512,18 +565,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if it's sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         // prepare data for sign
         $dataForSign = [
@@ -599,18 +648,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if is sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         // prepare data for sign
         $dataForSign = [
@@ -667,18 +712,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if is sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         // prepare data for sign
         $dataForSign = [
@@ -734,18 +775,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if is sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
 //        $params['BatchPayaItemInfos'] = json_encode($params['BatchPayaItemInfos']);
 
@@ -813,18 +850,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if is sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         // prepare data for sign
         $dataForSign = [
@@ -891,18 +924,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if is sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         // prepare data for sign
         $dataForSign = [
@@ -965,18 +994,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if is sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         // prepare data for sign
         $dataForSign = [
@@ -1049,18 +1074,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if is sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         // prepare data for sign
         $dataForSign = [
@@ -1125,18 +1146,14 @@ class BankingService extends BaseService
         $params['Timestamp'] = date('Y/m/d H:i:s:z');
         date_default_timezone_set($defaultTimeZone);
 
+        $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
         $option = [
             'headers' => $header,
             $paramKey => $params, // set query param for validation
         ];
 
         self::validateOption($option, self::$jsonSchema[$apiName], $paramKey);
-
-        // replace private key if is sent in input parameters
-        if(isset($params['privateKey'])) {
-            $privateKey = $params['privateKey'];
-            unset($params['privateKey']);
-        }
+        unset($params['privateKey']);
 
         // prepare data for sign
         $dataForSign = [

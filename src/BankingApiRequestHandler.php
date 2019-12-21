@@ -20,7 +20,7 @@ class BankingApiRequestHandler extends ApiRequestHandler
      * @throws PodException
      */
     public static function Request($baseUri, $method, $relativeUri, $option, $restFull = false, $optionHasArray = false) {
-        $result = parent::Request($baseUri, $method, $relativeUri, $option, $restFull = false, $optionHasArray = false);
+        $result = parent::Request($baseUri, $method, $relativeUri, $option, $restFull, $optionHasArray);
         $xmlData = $result['result']['result'];
         $xmlDoc = new \DOMDocument();
         $xmlDoc->loadXML($xmlData);
@@ -30,9 +30,8 @@ class BankingApiRequestHandler extends ApiRequestHandler
         if (isset($bankResult["IsSuccess"]) && !$bankResult["IsSuccess"]) {
             throw new PodException($bankResult["Message"], $bankResult["MessageCode"],null, $bankResult);
         } else {
-            $result['result'] =  $bankResult;
+            $result['result']['result'] =  $bankResult;
             return $result;
         }
     }
-
 }
