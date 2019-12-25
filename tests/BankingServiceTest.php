@@ -32,7 +32,7 @@ final class BankingServiceTest extends TestCase
         $baseInfo->setTokenIssuer(self::TOKEN_ISSUER);
         $baseInfo->setToken(self::API_TOKEN);
 
-        self::$bankingService = new BankingService($baseInfo);
+        self::$bankingService = new BankingService($baseInfo, 'ewe');
     }
 
     public function testGetShebaInfoAllParameters()

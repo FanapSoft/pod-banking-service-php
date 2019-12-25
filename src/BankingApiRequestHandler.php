@@ -21,17 +21,22 @@ class BankingApiRequestHandler extends ApiRequestHandler
      */
     public static function Request($baseUri, $method, $relativeUri, $option, $restFull = false, $optionHasArray = false) {
         $result = parent::Request($baseUri, $method, $relativeUri, $option, $restFull, $optionHasArray);
+        try {
         $xmlData = $result['result']['result'];
         $xmlDoc = new \DOMDocument();
         $xmlDoc->loadXML($xmlData);
 
         $x = $xmlDoc->documentElement;
         $bankResult = json_decode($x->nodeValue, true);
-        if (isset($bankResult["IsSuccess"]) && !$bankResult["IsSuccess"]) {
-            throw new PodException($bankResult["Message"], $bankResult["MessageCode"],null, $bankResult);
-        } else {
-            $result['result']['result'] =  $bankResult;
-            return $result;
+            if (isset($bankResult["IsSuccess"]) && !$bankResult["IsSuccess"]) {
+                throw new PodException($bankResult["Message"], $bankResult["MessageCode"],null, $bankResult);
+            } else {
+                $result['result']['result'] =  $bankResult;
+            }
+        } catch (PodException $e) {
+            throw new PodException($e->getMessage(), $e->getCode());
         }
+
+        return $result;
     }
 }
