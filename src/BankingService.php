@@ -125,7 +125,7 @@ class BankingService extends BaseService
         $paramKey = $method == 'GET' ? 'query' : 'form_params';
 
         $relativeUri = self::$bankingServiceApi[$apiName]['subUri'];
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -192,7 +192,7 @@ class BankingService extends BaseService
         $paramKey = $method == 'GET' ? 'query' : 'form_params';
 
         $relativeUri = self::$bankingServiceApi[$apiName]['subUri'];
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -214,6 +214,7 @@ class BankingService extends BaseService
         // create signature
         $privateKeyId = openssl_pkey_get_private($privateKey);
         $data = json_encode($dataForSign, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
         if (openssl_sign($data,$signature , $privateKeyId, OPENSSL_ALGO_SHA1)) {
             $option[$paramKey]['signature'] = base64_encode($signature);
         }
@@ -257,7 +258,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -321,7 +322,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -396,7 +397,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -435,7 +436,6 @@ class BankingService extends BaseService
         // create signature
         $privateKeyId = openssl_pkey_get_private($privateKey);
         $data = json_encode($dataForSign, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-//        var_dump($data);die;
         if (openssl_sign($data,$signature , $privateKeyId, OPENSSL_ALGO_SHA1)) {
             $option[$paramKey]['signature'] = base64_encode($signature);
         }
@@ -481,7 +481,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -562,7 +562,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -645,7 +645,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -709,7 +709,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -772,7 +772,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -847,7 +847,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -921,7 +921,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -991,7 +991,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -1071,7 +1071,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;
@@ -1143,7 +1143,7 @@ class BankingService extends BaseService
         }
         array_walk_recursive($params, 'self::prepareData');
 
-        $params['Timestamp'] = date('Y/m/d H:i:s:z');
+        $params['Timestamp'] = date('Y/m/d H:i:s:000');
         date_default_timezone_set($defaultTimeZone);
 
         $privateKey = $params['privateKey'] = isset($params['privateKey']) ? $params['privateKey'] : $privateKey;

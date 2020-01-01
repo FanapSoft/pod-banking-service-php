@@ -34,7 +34,6 @@
         },
         "sheba": {
           "type": "string",
-          "pattern": "^(|IR)(?=.{24}$)[0-9]*$",
           "pattern": "^(|IR)(\\d)(?!\\1{23}$)\\d{23}$"
         }
       },
@@ -132,7 +131,7 @@
         "Sheba": {
           "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
           "title": "کد شبا حساب بانکی",
-          "description": "شبا که به صورت عددی وارد می شود. (بدون IR)"
+          "description": "شبا که به صورت عددی وارد می شود. (با IR)"
         },
         "ShenaseVariz": {
           "type": "string"
@@ -787,7 +786,7 @@
         "Sheba": {
           "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
           "title": "کد شبا حساب بانکی",
-          "description": "شبا که به صورت عددی وارد می شود. (بدون IR)"
+          "description": "شبا که به صورت عددی وارد می شود. (با IR)"
         },
         "Timestamp": {
           "type": "string"
@@ -872,7 +871,7 @@
               "DestShebaNumber": {
                 "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
                 "title": "کد شبا حساب بانکی مقصد",
-                "description": "شبا که به صورت عددی وارد می شود. (بدون IR)"
+                "description": "شبا که به صورت عددی وارد می شود. (با IR)"
               },
               "BillNumber": {
                 "type": "string"
@@ -889,7 +888,7 @@
           }
         },
         "privateKey": {
-          "type": "Resource"
+          "type": "string"
         }
       },
       "required": [
@@ -951,7 +950,7 @@
         "Sheba": {
           "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
           "title": "کد شبا حساب بانکی",
-          "description": "شبا که به صورت عددی وارد می شود. (بدون IR)"
+          "description": "شبا که به صورت عددی وارد می شود. (با IR)"
         },
         "StartDate": {
           "type": "string",
@@ -1045,7 +1044,7 @@
         "Sheba": {
           "pattern": "^IR(\\d)(?!\\1{23}$)\\d{23}$",
           "title": "کد شبا حساب بانکی",
-          "description": "شبا که به صورت عددی وارد می شود. (بدون IR)"
+          "description": "شبا که به صورت عددی وارد می شود. (با IR)"
         },
         "privateKey": {
           "type": "string"
