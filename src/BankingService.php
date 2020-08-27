@@ -1,10 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
- * User :  keshtgar
- * Date :  6/28/19
- * Time : 10:29 AM
- *
  * $baseInfo BaseInfo
  */
 namespace Pod\Banking\Service;

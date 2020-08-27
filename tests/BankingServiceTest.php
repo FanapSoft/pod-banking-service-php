@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: keshtgar
- * Date: 11/11/19
- * Time: 9:49 AM
- */
 use PHPUnit\Framework\TestCase;
 use Pod\Banking\Service\BankingService;
 use Pod\Base\Service\BaseInfo;
@@ -16,11 +10,11 @@ final class BankingServiceTest extends TestCase
 //    public static $apiToken;
     public static $bankingService;
     const TOKEN_ISSUER = 1;
-    const API_TOKEN = '4d3d6b85e2e844b0ade83cc2ec5b4c85';
-    const ACCESS_TOKEN = '7e1044745ba543ce97231dafa200859f';
-    const CLIENT_ID = '6257411i38cb46e0ae26be4629583b22';
-    const CLIENT_SECRET = 'd33b5e71';
-    const CONFIRM_CODE = '2007431';
+    const API_TOKEN = '{Put Api Token}';
+    const ACCESS_TOKEN = '{Put Access Token}';
+    const CLIENT_ID = 'Put client id';
+    const CLIENT_SECRET = 'Put client secret';
+    const CONFIRM_CODE = 'Put confirm code';
 
     public function setUp(): void
     {
@@ -32,7 +26,7 @@ final class BankingServiceTest extends TestCase
         $baseInfo->setTokenIssuer(self::TOKEN_ISSUER);
         $baseInfo->setToken(self::API_TOKEN);
 
-        self::$bankingService = new BankingService($baseInfo, 'ewe');
+        self::$bankingService = new BankingService($baseInfo, 'Put private key');
     }
 
     public function testGetShebaInfoAllParameters()
@@ -40,7 +34,7 @@ final class BankingServiceTest extends TestCase
         $params =
         [
             ## ============== Required Parameters  ====================
-            "sheba"              => "IR550560960180002284298001",
+            "sheba"              => "Put Sheba",
             ## ============== Optional Parameters  ====================
             'scVoucherHash'      => ['{Put Service Call Voucher Hashes}'],
             'scApiKey'           => '{Put service call Api Key}',
@@ -63,7 +57,7 @@ final class BankingServiceTest extends TestCase
         $params =
         [
             ## ============== Required Parameters  ====================
-            "sheba"              => "IR550560960180002284298001",
+            "sheba"              => "Put sheba",
         ];
         try {
             $result = self::$bankingService->getShebaInfo($params);
@@ -123,7 +117,7 @@ final class BankingServiceTest extends TestCase
         $params =
             [
                 ## ============== Required Parameters  ====================
-                "cardNumber"        => "6104337865445059",
+                "cardNumber"        => "put card number",
                 ## ============== Optional Parameters  ====================
                 'scVoucherHash'     => ['{Put Service Call Voucher Hashes}'],
                 'scApiKey'          => '{Put service call Api Key}',
@@ -146,7 +140,7 @@ final class BankingServiceTest extends TestCase
         $params =
             [
                 ## ============== Required Parameters  ====================
-                'cardNumber' => '6104337865445059',
+                'cardNumber' => 'put card number',
             ];
 
         try {
